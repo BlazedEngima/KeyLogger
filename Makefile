@@ -1,5 +1,3 @@
-CONFIG_MODULE_SIG=n
-
 obj-m	:= keylogger.o 
 KVERSION := $(shell uname -r)
 PWD	:= $(shell pwd)
